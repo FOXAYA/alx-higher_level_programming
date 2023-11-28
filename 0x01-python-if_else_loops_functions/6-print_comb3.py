@@ -1,4 +1,7 @@
 #!/usr/bin/python3
-for digit1 in range(10):
-    for digit2 in range(digit1 + 1, 10):
-        print(f"{digit1:}{digit2:}", end=', ' if digit2 < 9 else '\n')
+for i in range(0, 9):
+    for j in range(i + 1, 10):
+        if i == 8:
+            print("{}{}".format(i, j))
+        else:
+            print("{}{}".format(i, j), end=", ")
