@@ -2,7 +2,7 @@
 def safe_print_integer(value):
     try:
         print("{:d}".format(value))
-    Exception:
+    except (ValueError, TypeError):
         return False
     else:
         return True
