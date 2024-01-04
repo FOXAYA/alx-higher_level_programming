@@ -1,89 +1,77 @@
-#!/usr/bin/python3
-""" defines a Rectangle class"""
+"""The n queens puzzle."""
+class NQueens:
+    """Generate all valid solutions for the n queens puzzle"""
+    def __init__(self, size):
+        # Store the puzzle (problem) size and the number of valid solutions
+        self.size = size
+        self.solutions = 0
+        self.solve()
 
+    def solve(self):
+        """Solve the n queens puzzle and print the number of solutions"""
+        positions = [-1] * self.size
+        self.put_queen(positions, 0)
+        print("Found", self.solutions, "solutions.")
 
-class Rectangle:
-    """Rectangle Class"""
-    number_of_instances = 0
-    print_symbol = '#'
-
-    def __init__(self, width=0, height=0):
-        """ Init Method """
-        self.width = width
-        self.height = height
-        Rectangle.number_of_instances += 1
-
-    @property
-    def width(self):
-        """getter def"""
-        return self.__width
-
-    @width.setter
-    def width(self, value):
-        """setter def"""
-        if type(value) is not int:
-            raise TypeError('width must be an integer')
-        if value < 0:
-            raise ValueError('width must be >= 0')
-        self.__width = value
-
-    @property
-    def height(self):
-        """getter def"""
-        return self.__height
-
-    @height.setter
-    def height(self, value):
-        """setter def"""
-        if type(value) is not int:
-            raise TypeError('height must be an integer')
-        if value < 0:
-            raise ValueError('height must be >= 0')
-        self.__height = value
-
-    def area(self):
-        """define area def"""
-        return self.__width * self.__height
-
-    def perimeter(self):
-        """define perimeter def"""
-        if self.__width == 0 or self.__height == 0:
-            return 0
-        return(self.__width * 2) + (self.__height * 2)
-
-    def __str__(self):
-        """define informal print str"""
-        if self.__width == 0 or self.__height == 0:
-            return ""
+    def put_queen(self, positions, target_row):
+        """
+        Try to place a queen on target_row by checking all N possible cases.
+        If a valid place is found the function calls itself trying to place a queen
+        on the next row until all N queens are placed on the NxN board.
+        """
+        # Base (stop) case - all N rows are occupied
+        if target_row == self.size:
+            self.show_full_board(positions)
+            # self.show_short_board(positions)
+            self.solutions += 1
         else:
-            hsh = str(self.print_symbol)
-            return ((hsh*self.__width + "\n")*self.__height)[:-1]
+            # For all N columns positions try to place a queen
+            for column in range(self.size):
+                # Reject all invalid positions
+                if self.check_place(positions, target_row, column):
+                    positions[target_row] = column
+                    self.put_queen(positions, target_row + 1)
 
-    def __repr__(self):
-        """define official print repr"""
-        return 'Rectangle({}, {})'.format(self.__width, self.__height)
 
-    def __del__(self):
-        """define delete method"""
-        Rectangle.number_of_instances -= 1
-        print('Bye rectangle...')
-
-    @staticmethod
-    def bigger_or_equal(rect_1, rect_2):
+    def check_place(self, positions, ocuppied_rows, column):
         """
-            Biggest Rectangle (Rectangle)
+        Check if a given position is under attack from any of
+        the previously placed queens (check column and diagonal positions)
         """
-        if not isinstance(rect_1, Rectangle):
-            raise TypeError("rect_1 must be an instance of Rectangle")
-        if not isinstance(rect_2, Rectangle):
-            raise TypeError("rect_2 must be an instance of Rectangle")
-        Area1 = rect_1.area()
-        Area2 = rect_2.area()
-        if Area1 >= Area2:
-            return rect_1
-        return rect_2
+        for i in range(ocuppied_rows):
+            if positions[i] == column or \
+                positions[i] - i == column - ocuppied_rows or \
+                positions[i] + i == column + ocuppied_rows:
 
-    @classmethod
-    def square(cls, size=0):
-        """ Returns a new Rectangle instance """
-        return (cls(size, size))
+                return False
+        return True
+
+    def show_full_board(self, positions):
+        """Show the full NxN board"""
+        for row in range(self.size):
+            line = ""
+            for column in range(self.size):
+                if positions[row] == column:
+                    line += "Q "
+                else:
+                    line += ". "
+            print(line)
+        print("\n")
+
+    def show_short_board(self, positions):
+        """
+        Show the queens positions on the board in compressed form,
+        each number represent the occupied column position in the corresponding row.
+        """
+        line = ""
+        for i in range(self.size):
+            line += str(positions[i]) + " "
+        print(line)
+
+def main():
+    """Initialize and solve the n queens puzzle"""
+    NQueens(8)
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
