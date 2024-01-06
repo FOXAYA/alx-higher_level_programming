@@ -1,0 +1,42 @@
+The ``print_square`` module
+======================
+
+Using ``print_square``
+-------------------
+
+
+The ``print_square`` module
+======================
+
+Using ``print_square``
+-------------------
+
+Write a function that prints My name is <first name> <last name>
+
+    Prototype: def print_square(first_name, last_name=""):
+    first_name and last_name must be strings otherwise, raise a TypeError exception with the message first_name must be a string or last_name must be a string
+    You are not allowed to import any module
+
+>>> print_square = __import__('4-print_square').print_square
+>>> size = None
+>>> print_square(size)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 6, in print_square
+TypeError: size must be an integer
+>>> size = 0
+>>> print_square(size)
+>>> 
+>>> size = -1
+>>> print_square(size)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 8, in print_square
+ValueError: size must be >= 0
+>>> size = -13.5
+>>> print_square(size)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 6, in print_square
+TypeError: size must be an integer
+>>>
