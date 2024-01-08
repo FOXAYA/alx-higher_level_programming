@@ -7,8 +7,8 @@
 """
 
 
-class MyList:
-    """MyList that inhertance from list"""
+class MyList(list):
+    """MyList that inhertance friom list"""
     def print_sorted(self):
         """Method prints the list, but sorted (ascending sort)"""
         print(sorted(list(self)))
