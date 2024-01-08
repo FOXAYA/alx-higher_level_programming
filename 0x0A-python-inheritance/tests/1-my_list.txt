@@ -1,0 +1,44 @@
+======================
+The ``1-my_list`` module
+======================
+
+Using ``print_sorted``
+-------------------
+
+This is a text file to test the 1-my_list module.  First import
+``print_sorted`` from the ``1-my_list`` module:
+
+>>> MyList = __import__('1-my_list').MyList
+
+Now use it:
+
+>>> my_list = MyList([1, 4, 2, 3, 5])
+
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+>>> my_list.append(-100)
+
+>>> my_list.print_sorted()
+[-100, 1, 2, 3, 4, 5]
+
+>>> print(my_list)
+[1, 4, 2, 3, 5, -100]
+
+>>> copy = my_list.print_sorted()
+[-100, 1, 2, 3, 4, 5]
+
+>>> copy is my_list.print_sorted()
+[-100, 1, 2, 3, 4, 5]
+True
+
+>>> my_list = MyList()
+
+>>> my_list.print_sorted()
+[]
+
+>>> print(my_list)
+[]
