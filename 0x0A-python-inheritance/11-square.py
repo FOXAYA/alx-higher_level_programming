@@ -1,18 +1,13 @@
 #!/usr/bin/python3
+"""defines a Rectangle subclass Square"""
 
 
 class Square(Rectangle):
-    """Square class"""
+    """Represent a square"""
+
     def __init__(self, size):
-        """Method for initializing a square"""
+        """Initialize a new square
+        """
         self.integer_validator("size", size)
-        self.__size = size
         super().__init__(size, size)
-
-    def area(self):
-        """Method that returns area of a square"""
-        return self.__size ** 2
-
-    def __str__(self):
-        """Method that returns a string"""
-        return "[Square] {}/{}".format(self.__size, self.__size)
+        self.__size = size
