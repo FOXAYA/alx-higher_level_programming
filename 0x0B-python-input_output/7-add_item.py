@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Add all arguments to a Python list and save them to a file."""
+"""This module adds all arguments to a Python list and save them to a file."""
+
+
 import sys
 
 if __name__ == "__main__":
@@ -12,4 +14,4 @@ if __name__ == "__main__":
     except FileNotFoundError:
         items = []
     items.extend(sys.argv[1:])
-    save_to_json_file(items, "add_item.json")
+    save_to_json_file(items, "add_item.json"))
